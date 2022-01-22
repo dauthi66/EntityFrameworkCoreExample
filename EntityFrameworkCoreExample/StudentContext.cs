@@ -11,8 +11,18 @@ namespace EntityFrameworkCoreExample
     // getting started with entity tutorial:
     // https://docs.microsoft.com/en-us/ef/core/get-started/overview/first-app
     // inherit database class from DbContext (Context generally used to name database Class)
-    internal class StudentContext : DbContext
+    public class StudentContext : DbContext
     {
+        public StudentContext()
+        {
 
+        }
+        //override class that directs where your database is located
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            //set options to use sqlserver at specified location. Database= desired name of database.Localdb included with VS.
+            //Trusted connection indicates our windows account should be used.
+            options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=EFCoreExample;Trusted_Connection=True;");
+        }
     }
 }
